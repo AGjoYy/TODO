@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-@Entity(tableName = "task")
+@Entity(tableName = "tasks")
 data class Task(
     @PrimaryKey(autoGenerate = true)
     val Id:Int = 0,

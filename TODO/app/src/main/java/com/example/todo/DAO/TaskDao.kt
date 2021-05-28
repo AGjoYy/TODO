@@ -1,22 +1,22 @@
 package com.example.todo.DAO
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.todo.Entities.Task
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM Task")
-    abstract fun getAll(): List<Task>
+    @Query("SELECT * FROM Tasks")
+    suspend fun getAll(): List<Task>
 
-    @Query("SELECT * FROM Task WHERE Id = :id")
-    abstract fun findById(id: Int): Task
+    @Query("SELECT * FROM Tasks WHERE Id = :id")
+    suspend fun getById(id: Int): Task
 
     @Insert
-    abstract fun insert(task: Task)
+    suspend fun create(task: Task)
 
     @Delete
-    abstract fun delete(task: Task)
+    suspend fun delete(task: Task)
+
+    @Update
+    suspend fun update(task: Task)
 }
