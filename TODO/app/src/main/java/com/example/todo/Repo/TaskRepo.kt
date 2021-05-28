@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlinx.serialization.Serializable
 
 
 class TaskRepo @Inject constructor(@ApplicationContext context: Context) {
@@ -33,6 +34,10 @@ class TaskRepo @Inject constructor(@ApplicationContext context: Context) {
 
     suspend fun delete(task: Task) {
         taskDao.delete(task)
+    }
+
+    suspend fun deleteAll() {
+        taskDao.deleteAll()
     }
 
     suspend fun create(task: Task) {
