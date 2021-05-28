@@ -9,7 +9,7 @@
 
     <!--edit text for our course name-->
     <EditText
-        android:id="@+id/idEdtCourseName"
+        android:id="@+id/taskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -17,7 +17,7 @@
 
     <!--edit text for our course description-->
     <EditText
-        android:id="@+id/idEdtCourseDescription"
+        android:id="@+id/taskDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

@@ -2,10 +2,11 @@ package com.example.todo.DAO
 
 import androidx.room.*
 import com.example.todo.Entities.Task
+import kotlinx.serialization.Serializable
 
 @Dao
-interface TaskDao {
-    @Query("SELECT * FROM Tasks")
+interface TaskDao  {
+    @Query("SELECT * FROM Tasks ORDER BY Id DESC")
     suspend fun getAll(): List<Task>
 
     @Query("SELECT * FROM Tasks WHERE Id = :id")
@@ -16,6 +17,9 @@ interface TaskDao {
 
     @Delete
     suspend fun delete(task: Task)
+
+    @Query("DELETE FROM Tasks")
+    suspend fun deleteAll()
 
     @Update
     suspend fun update(task: Task)
