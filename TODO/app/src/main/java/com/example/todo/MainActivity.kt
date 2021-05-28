@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addButton = findViewById(R.id.addButton)
-//    //    addButton.setOnClickListener {
-//            val addActivity = Intent(this, AddUpdateActivity::class.java)
-//            startActivity(addActivity)
-//        }
+        addButton.setOnClickListener {
+            val addActivity = Intent(this, AddUpdateActivity::class.java)
+            startActivity(addActivity)
+        }
     }
 
 //    CoroutineScope(IO).launch
