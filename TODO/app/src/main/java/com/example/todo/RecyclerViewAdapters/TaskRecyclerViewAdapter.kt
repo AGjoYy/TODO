@@ -22,11 +22,15 @@ import javax.inject.Inject
 class TaskRecyclerViewAdapter @Inject constructor() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var taskRepo: TaskRepo? = null
-    private lateinit var tasks: List<Task>
+    private var taskRepo: TaskRepo? = null
+    private lateinit var tasks: MutableList<Task>
 
     fun setTasks(tasks: List<Task>) {
-        this.tasks = tasks
+        this.tasks = tasks as MutableList<Task>
+    }
+
+    fun setTaskRepository(taskRepo: TaskRepo) {
+        this.taskRepo = taskRepo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -45,6 +49,15 @@ class TaskRecyclerViewAdapter @Inject constructor() :
 
     override fun getItemCount(): Int {
         return tasks.size
+    }
+
+    fun deleteOnSwipe(position: Int) {
+        val removedTask = tasks.removeAt(position)
+        notifyItemRemoved(position)
+
+        CoroutineScope(IO).launch {
+            taskRepo?.delete(removedTask)
+        }
     }
 
     inner class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -3,8 +3,10 @@ package com.example.todo
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.Actions.SwipeToDelete
 import com.example.todo.RecyclerViewAdapters.TaskRecyclerViewAdapter
 import com.example.todo.Repo.TaskRepo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var taskRepo: TaskRepo
-
     @Inject
     lateinit var taskRecyclerViewAdapter: TaskRecyclerViewAdapter
 
@@ -41,17 +42,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView = findViewById(R.id.taskItem)
-        recyclerViewInit();
+        recyclerViewInit()
     }
 
     private fun recyclerViewInit() {
         CoroutineScope(IO).launch {
-            //taskRepo.deleteAll()
             val tasks = taskRepo.getAll()
             withContext(Dispatchers.Main) {
-                taskRecyclerViewAdapter.taskRepo = taskRepo
+                taskRecyclerViewAdapter.setTaskRepository(taskRepo)
                 taskRecyclerViewAdapter.setTasks(tasks)
                 recyclerViewApply()
+
+                val itemTouchHelper = ItemTouchHelper(SwipeToDelete(taskRecyclerViewAdapter))
+                itemTouchHelper.attachToRecyclerView(recyclerView)
             }
         }
     }
