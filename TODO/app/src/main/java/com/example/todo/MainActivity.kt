@@ -44,16 +44,18 @@ class MainActivity : AppCompatActivity() {
         recyclerViewInit();
     }
 
-    private fun recyclerViewInit(){
+    private fun recyclerViewInit() {
         CoroutineScope(IO).launch {
             //taskRepo.deleteAll()
             val tasks = taskRepo.getAll()
             withContext(Dispatchers.Main) {
+                taskRecyclerViewAdapter.taskRepo = taskRepo
                 taskRecyclerViewAdapter.setTasks(tasks)
                 recyclerViewApply()
             }
         }
     }
+
     private fun recyclerViewApply() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
