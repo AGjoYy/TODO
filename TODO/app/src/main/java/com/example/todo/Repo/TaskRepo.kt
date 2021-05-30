@@ -15,6 +15,7 @@ import javax.inject.Inject
 import kotlinx.serialization.Serializable
 
 
+@Suppress("SENSELESS_COMPARISON")
 class TaskRepo @Inject constructor(@ApplicationContext context: Context) {
 
     private var taskDao: TaskDao
@@ -47,5 +48,12 @@ class TaskRepo @Inject constructor(@ApplicationContext context: Context) {
 
     suspend fun update(task: Task) {
         taskDao.update(task)
+    }
+
+    suspend fun createOrUpdate(task : Task){
+        if(taskDao.getById(task.Id) == null)
+            taskDao.create(task)
+        else
+            taskDao.update(task)
     }
 }
