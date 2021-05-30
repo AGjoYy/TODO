@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TODO</string>
+    <string Title="TODO APP" name="TODO">TODO APP</string>
     <string name="title_activity_add_update_acivity">AddUpdateAcivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in

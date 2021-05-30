@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.RecyclerViewAdapters.TaskRecyclerViewAdapter
 import javax.inject.Inject
 
-class SwipeToDelete (var adapter: TaskRecyclerViewAdapter) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+class SwipeToDelete (var adapter: TaskRecyclerViewAdapter) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
 
     override fun onMove(
         recyclerView: RecyclerView,
